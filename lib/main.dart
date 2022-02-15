@@ -1,11 +1,13 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:kiramkolay/view/splash/splash_view.dart';
+import 'view/splash/splash_view.dart';
 import 'package:provider/provider.dart';
 
 import 'constants/app_constants.dart';
 import 'core/init/language/language_manager.dart';
+import 'core/init/navigation/navigation_route.dart';
+import 'core/init/navigation/navigation_service.dart';
 import 'core/init/provider/app_provider.dart';
 
 void main() async {
@@ -39,6 +41,8 @@ class MyApp extends StatelessWidget {
       supportedLocales: context.supportedLocales,
       debugShowCheckedModeBanner: false,
       locale: context.locale,
+      navigatorKey: NavigationService.instance.navigatorKey,
+      onGenerateRoute: NavigationRoute.instance.generateRoute,
       home: const SplashView(),
     );
   }

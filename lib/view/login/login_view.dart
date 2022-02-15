@@ -6,17 +6,18 @@ import 'package:flutter_mobx/flutter_mobx.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:kiramkolay/core/components/button/costom_outlined_button.dart';
-import 'package:kiramkolay/core/components/button/custom_button.dart';
-import 'package:kiramkolay/core/components/button/custom_inkwell.dart';
-import 'package:kiramkolay/core/components/country_picker/selection_dialog.dart';
-import 'package:kiramkolay/core/components/text/high_text.dart';
-import 'package:kiramkolay/core/components/text/normal_text.dart';
-import 'package:kiramkolay/core/extensions/context_extension.dart';
-import 'package:kiramkolay/core/extensions/duration_extension.dart';
-import 'package:kiramkolay/core/extensions/string_extension.dart';
-import 'package:kiramkolay/core/init/language/locale_keys.g.dart';
-import 'package:kiramkolay/core/init/navigation/navigation_service.dart';
+import '../../core/components/button/costom_outlined_button.dart';
+import '../../core/components/button/custom_button.dart';
+import '../../core/components/button/custom_inkwell.dart';
+import '../../core/components/country_picker/selection_dialog.dart';
+import '../../core/components/text/high_text.dart';
+import '../../core/components/text/normal_text.dart';
+import '../../core/extensions/context_extension.dart';
+import '../../core/extensions/duration_extension.dart';
+import '../../core/extensions/string_extension.dart';
+import '../../core/init/language/locale_keys.g.dart';
+import '../../core/init/navigation/navigation_constants.dart';
+import '../../core/init/navigation/navigation_service.dart';
 import 'package:pinput/pin_put/pin_put.dart';
 import '../../constants/app_constants.dart';
 import '../../core/components/text/low_text.dart';
@@ -36,8 +37,9 @@ class LoginView extends StatefulWidget {
 
 class _LoginViewState extends BaseState<LoginView> {
   late LoginViewModel loginViewModel;
-  TextEditingController countryCodeTEC = TextEditingController();
-  TextEditingController phoneNumberTEC = TextEditingController();
+  TextEditingController countryCodeController = TextEditingController();
+  TextEditingController phoneNumberController = TextEditingController();
+  TextEditingController pinPutController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BaseView(
@@ -46,8 +48,9 @@ class _LoginViewState extends BaseState<LoginView> {
         loginViewModel.context = context;
       },
       onDispose: () {
-        countryCodeTEC.dispose();
-        phoneNumberTEC.dispose();
+        countryCodeController.dispose();
+        phoneNumberController.dispose();
+        pinPutController.dispose();
       },
       viewModel: LoginViewModel(),
       onPageBuilder: (context) => buildScaffold(),
@@ -123,13 +126,13 @@ class _LoginViewState extends BaseState<LoginView> {
             Expanded(
               flex: 1,
               child: CustomTextField(
-                controller: countryCodeTEC,
+                controller: countryCodeController,
                 onTap: () {
                   showSelectionAlertDialog(
                       context: context,
                       onSelect: (countryCode) {
                         if (countryCode.dialCode != null) {
-                          countryCodeTEC.text = countryCode.dialCode!;
+                          countryCodeController.text = countryCode.dialCode!;
                         }
                       });
                 },
@@ -141,7 +144,7 @@ class _LoginViewState extends BaseState<LoginView> {
             Expanded(
               flex: 2,
               child: CustomTextField(
-                controller: phoneNumberTEC,
+                controller: phoneNumberController,
                 maxLength: 10,
                 hintText: LocaleKeys.phoneNumber.locale,
                 keyboardType: TextInputType.phone,
@@ -164,8 +167,8 @@ class _LoginViewState extends BaseState<LoginView> {
   CustomButton takeCodeWithSmsButton() {
     return CustomButton(
       onPressed: () {
-        if (countryCodeTEC.text.isNotEmpty) {
-          if (phoneNumberTEC.text.length == 10) {
+        if (countryCodeController.text.isNotEmpty) {
+          if (phoneNumberController.text.length == 10) {
             loginViewModel.changeIsCodeSended(true);
           } else {
             Fluttertoast.showToast(msg: 'Invalid phone number');

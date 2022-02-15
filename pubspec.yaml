@@ -104,7 +104,7 @@ flutter:
     - family: Montserrat
       fonts:
         - asset: assets/fonts/Montserrat-Regular.ttf
-    - family: NotoSansMono
+    - family: 
       fonts:
         - asset: assets/fonts/NotoSansMono-Regular.ttf
   #       - asset: fonts/Schyler-Italic.ttf

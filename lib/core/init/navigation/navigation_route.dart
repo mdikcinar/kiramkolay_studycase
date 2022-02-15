@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kiramkolay/view/home/home_view.dart';
+import '../../../view/home/home_view.dart';
 
 import '../../base/view/not_found_navigaiton.dart';
 import 'navigation_constants.dart';

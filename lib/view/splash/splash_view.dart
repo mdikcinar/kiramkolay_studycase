@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kiramkolay/view/home/home_view.dart';
-import 'package:kiramkolay/view/login/login_view.dart';
-import 'package:kiramkolay/view/splash/viewmodel/splash_viewmodel.dart';
+import '../home/home_view.dart';
+import '../login/login_view.dart';
+import 'viewmodel/splash_viewmodel.dart';
 import 'package:provider/provider.dart';
 
 class SplashView extends StatefulWidget {

@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:kiramkolay/core/extensions/context_extension.dart';
+import '../../extensions/context_extension.dart';
 
 class CustomButton extends StatefulWidget {
   final String? title;
   final IconData? icon;
   final double? iconSize;
-  final double? minWith;
+  final double? maxWith;
   final Color? backgoundColor;
-  final double? minHeight;
+  final double? maxHeight;
   final double? fontSize;
   final Color? fontColor;
   final Color? iconColor;
@@ -18,10 +18,10 @@ class CustomButton extends StatefulWidget {
   const CustomButton(
       {Key? key,
       this.title,
-      this.minWith,
+      this.maxWith,
       required this.onPressed,
       this.fontSize,
-      this.minHeight,
+      this.maxHeight,
       this.padding,
       this.child,
       this.backgoundColor,
@@ -46,8 +46,8 @@ class _CustomButtonState extends State<CustomButton> {
       },
       child: Container(
         padding: widget.padding ?? EdgeInsets.all(context.normalPadding),
-        width: widget.minWith,
-        height: widget.minHeight,
+        width: widget.maxWith,
+        height: widget.maxHeight,
         alignment: Alignment.center,
         decoration: BoxDecoration(
             color: widget.backgoundColor ?? context.theme.primaryColor,

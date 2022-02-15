@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kiramkolay/core/components/text/normal_text.dart';
-import 'package:kiramkolay/core/extensions/context_extension.dart';
+import '../text/normal_text.dart';
+import '../../extensions/context_extension.dart';
+import '../../extensions/string_extension.dart';
+import '../../init/language/locale_keys.g.dart';
 
 import '../text/high_text.dart';
 import 'country_code.dart';
@@ -16,23 +18,7 @@ Future<void> showSelectionAlertDialog(
       insetPadding: EdgeInsets.all(context.extraHighPadding),
       contentPadding:
           EdgeInsets.only(left: context.extraHighPadding, right: context.extraHighPadding, bottom: context.highPadding),
-      title: Row(
-        children: [
-          InkWell(
-            onTap: () => Navigator.of(context).pop(),
-            child: Icon(
-              Icons.cancel_rounded,
-              color: context.theme.primaryColor.withOpacity(0.5),
-              size: context.highIconSize,
-            ),
-          ),
-          context.normalSizedBoxWidth,
-          HighText(
-            'Ülkenizi Seçin',
-            bold: true,
-          ),
-        ],
-      ),
+      title: dialogTitle(context),
       titlePadding: EdgeInsets.only(
         left: context.normalPadding,
         right: context.normalPadding,
@@ -47,6 +33,26 @@ Future<void> showSelectionAlertDialog(
         ),
       ),
     ),
+  );
+}
+
+Row dialogTitle(BuildContext context) {
+  return Row(
+    children: [
+      InkWell(
+        onTap: () => Navigator.of(context).pop(),
+        child: Icon(
+          Icons.cancel_rounded,
+          color: context.theme.primaryColor.withOpacity(0.5),
+          size: context.highIconSize,
+        ),
+      ),
+      context.normalSizedBoxWidth,
+      HighText(
+        LocaleKeys.selectCountry.locale,
+        bold: true,
+      ),
+    ],
   );
 }
 
@@ -90,7 +96,7 @@ class _CountyCodeSelectionDialogState extends State<CountyCodeSelectionDialog> {
                   padding: EdgeInsets.only(left: context.normalPadding),
                   child: Icon(Icons.search, size: context.normalIconSize),
                 ),
-                hintText: 'Ülke adı veya kodu ile arama yapın',
+                hintText: LocaleKeys.searchWithCountyNameOrCode.locale,
                 hintStyle: TextStyle(
                   color: context.defaultTextColor.withOpacity(0.6),
                   fontFamily: context.getDefaultFontFamily,

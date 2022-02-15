@@ -9,5 +9,9 @@ abstract class  LocaleKeys {
   static const takeCodeExplaining = 'takeCodeExplaining';
   static const takeCodeWithSms = 'takeCodeWithSms';
   static const takeCodeWithWhatsapp = 'takeCodeWithWhatsapp';
+  static const verifyTitle = 'verifyTitle';
+  static const cantGetCode = 'cantGetCode';
+  static const selectCountry = 'selectCountry';
+  static const searchWithCountyNameOrCode = 'searchWithCountyNameOrCode';
 
 }

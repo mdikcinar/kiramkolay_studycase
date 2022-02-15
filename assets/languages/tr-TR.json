@@ -6,5 +6,9 @@
     "phoneNumber": "Cep Telefonu",
     "takeCodeExplaining": "Telefon numaranızı onaylamak için bir kod göndereceğiz.",
     "takeCodeWithSms": "SMS ile Kod Alın",
-    "takeCodeWithWhatsapp": "WhatsApp ile Kod Alın"
+    "takeCodeWithWhatsapp": "WhatsApp ile Kod Alın",
+    "verifyTitle": "Telefonunuza gelen kodu girin",
+    "cantGetCode": "kodu alamadım",
+    "selectCountry": "Ülkenizi Seçin",
+    "searchWithCountyNameOrCode": "Ülke adı veya kodu ile arama yapın"
 }

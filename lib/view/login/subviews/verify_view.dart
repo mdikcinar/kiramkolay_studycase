@@ -7,25 +7,17 @@ extension _VerifyView on _LoginViewState {
       children: [
         logo(),
         context.highSizedBoxHeight,
-        loginTitleText('Telefonunuza gelen kodu girin'),
+        loginTitleText(LocaleKeys.verifyTitle.locale),
         context.highSizedBoxHeight,
         verifySubtitleText(),
         context.highSizedBoxHeight,
         pinPutField(),
         context.highSizedBoxHeight,
         timerText(),
-        CustomInkwell(
-          onTap: () {},
-          child: Text(
-            'kodu alamadım',
-            style: TextStyle(
-              decoration: TextDecoration.underline,
-              color: context.theme.primaryColor,
-              fontWeight: FontWeight.bold,
-              fontFamily: context.getDefaultFontFamily,
-            ),
-          ),
-        )
+        cantGetCodeText(),
+        Expanded(
+          child: confirmButton(),
+        ),
       ],
     );
   }
@@ -34,7 +26,8 @@ extension _VerifyView on _LoginViewState {
     return Text.rich(
       TextSpan(
         children: [
-          TextSpan(text: countryCodeTEC.text + phoneNumberTEC.text, style: const TextStyle(fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: countryCodeController.text + phoneNumberController.text, style: const TextStyle(fontWeight: FontWeight.bold)),
           const TextSpan(text: ' numarasına gönderdiğimiz 6 haneli kodu'),
           const TextSpan(text: ' giriniz.', style: TextStyle(fontWeight: FontWeight.bold)),
         ],
@@ -54,9 +47,10 @@ extension _VerifyView on _LoginViewState {
       fieldsCount: 6,
       eachFieldHeight: context.dynamicHeight(0.05),
       eachFieldWidth: context.dynamicHeight(0.05),
+      inputFormatters: [FilteringTextInputFormatter.digitsOnly],
       onSubmit: (String pin) => debugPrint(pin.toString()),
       //focusNode: _pinPutFocusNode,
-      //controller: _pinPutController,
+      controller: pinPutController,
       submittedFieldDecoration: _pinPutDecoration.copyWith(
         borderRadius: BorderRadius.circular(context.highRadius),
       ),
@@ -84,6 +78,40 @@ extension _VerifyView on _LoginViewState {
         fontSize: context.dynamicHeight(0.05),
         color: context.defaultTextColor,
         fontFamily: context.getDefaultMonoSpaceFontFamily,
+      ),
+    );
+  }
+
+  CustomInkwell cantGetCodeText() {
+    return CustomInkwell(
+      onTap: () {
+        Fluttertoast.showToast(msg: 'Code resending..');
+      },
+      child: Text(
+        LocaleKeys.cantGetCode.locale,
+        style: TextStyle(
+          decoration: TextDecoration.underline,
+          color: context.theme.primaryColor,
+          fontWeight: FontWeight.bold,
+          fontFamily: context.getDefaultFontFamily,
+        ),
+      ),
+    );
+  }
+
+  Center confirmButton() {
+    return Center(
+      child: CustomButton(
+        maxWith: context.dynamicWidth(0.9),
+        maxHeight: context.dynamicHeight(0.06),
+        title: 'Onayla',
+        onPressed: () {
+          if (pinPutController.text.length >= 6) {
+            NavigationService.instance.navigateToPage(path: NavigationConstants.homeView);
+          } else {
+            Fluttertoast.showToast(msg: 'Invalid code');
+          }
+        },
       ),
     );
   }

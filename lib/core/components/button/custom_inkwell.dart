@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kiramkolay/core/extensions/context_extension.dart';
+
+import '../../extensions/context_extension.dart';
 
 class CustomInkwell extends StatelessWidget {
   final Function() onTap;
