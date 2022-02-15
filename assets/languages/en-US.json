@@ -1,0 +1,10 @@
+{
+    "appName": "Kiram Kolay",
+    "loginTitle": "Üye Girişi Yapın ya da Üyelik Oluşturun",
+    "loginSubTitle": "Giriş yapmak ya da üyelik oluşturmak için telefon numaranızı girin. Şifreye ihtiyacınız yok! \n Verileriniz tamamen güvende.",
+    "countryCode": "Alan Kodu",
+    "phoneNumber": "Cep Telefonu",
+    "takeCodeExplaining": "Telefon numaranızı onaylamak için bir kod göndereceğiz.",
+    "takeCodeWithSms": "SMS ile Kod Alın",
+    "takeCodeWithWhatsapp": "WhatsApp ile Kod Alın"
+}
